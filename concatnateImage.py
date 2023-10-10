@@ -5,7 +5,7 @@ def drawDict(dic):
     string = ""
     for key, value in dic.items():
         if type(value) == dict:
-            value = drawDict(value)
+            value = "\n" + drawDict(value)
         string += f"{key}: {value}\n"
     return string
 
