@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.2",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/convert": {
+      "post": {
+        "summary": "Convert",
+        "operationId": "convert_convert_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "$ref": "#/components/schemas/ArtStyle" },
+            "name": "style",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Image Size",
+              "type": "integer",
+              "default": 1024
+            },
+            "name": "image_size",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "title": "Seed", "type": "integer", "default": 1024 },
+            "name": "seed",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_convert_convert_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/style-transfer": {
+      "post": {
+        "summary": "Test",
+        "operationId": "test_api_v1_style_transfer_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_test_api_v1_style_transfer_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArtStyle": {
+        "title": "ArtStyle",
+        "enum": [
+          "anime",
+          "chibi",
+          "chinese_art",
+          "concept",
+          "disney",
+          "fairy",
+          "fantasy",
+          "ghibi",
+          "knight",
+          "manga",
+          "manhua",
+          "manhwa",
+          "oil_painting",
+          "league_of_legends",
+          "star_war",
+          "3d_art",
+          "mechanics",
+          "water_color",
+          "stain_glass",
+          "ink_style",
+          "horoscope",
+          "sketch",
+          "barbie_doll",
+          "colorized",
+          "cartoonize",
+          "realistic",
+          "dark_fantasy",
+          "gothics",
+          "comics",
+          "cyberpunk",
+          "miku",
+          "gta",
+          "pop_art",
+          "doodle",
+          "mystical",
+          "mermaid",
+          "adventurers",
+          "retrowave",
+          "chinese_illustration",
+          "illustration2d",
+          "vector_art",
+          "cubism",
+          "fauvism",
+          "early_renaissance",
+          "ukiyo",
+          "romanticism",
+          "realism",
+          "indian",
+          "nature",
+          "digital_art",
+          "cowboy",
+          "medival",
+          "vintage_pencil",
+          "impressionism",
+          "underwater",
+          "dc_comics",
+          "chibi_3d",
+          "angel",
+          "viking",
+          "retro",
+          "magazine",
+          "barbie_3d",
+          "halloween",
+          "ghost",
+          "pirate",
+          "witch",
+          "onePiece",
+          "theNun",
+          "killer",
+          "naruto",
+          "tanjiro",
+          "superman",
+          "luffy",
+          "joker",
+          "harley",
+          "sasuke",
+          "sakura",
+          "jack_sparrow",
+          "nezuko",
+          "yuji_itadori",
+          "storm_troper",
+          "ash",
+          "zoro",
+          "mydoria",
+          "spiderman",
+          "captain_american",
+          "ironman",
+          "sanji",
+          "goku",
+          "vegeta",
+          "mikasa",
+          "attack_on_titan",
+          "batman",
+          "loki",
+          "mickey",
+          "anna_frozen",
+          "ariel",
+          "herminone",
+          "wonder_women",
+          "elsa",
+          "bulma",
+          "eren",
+          "ichigo",
+          "saitaima",
+          "han_solo",
+          "voldermold",
+          "werewolf",
+          "midas",
+          "none"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "Body_convert_convert_post": {
+        "title": "Body_convert_convert_post",
+        "type": "object",
+        "properties": {
+          "file": { "title": "File", "type": "string", "format": "binary" }
+        }
+      },
+      "Body_test_api_v1_style_transfer_post": {
+        "title": "Body_test_api_v1_style_transfer_post",
+        "type": "object",
+        "properties": {
+          "style": { "title": "Style", "type": "string" },
+          "positivePrompt": { "title": "Positiveprompt", "type": "string" },
+          "negativePrompt": { "title": "Negativeprompt", "type": "string" },
+          "file": { "title": "File", "type": "string", "format": "binary" },
+          "height": { "title": "Height", "type": "integer" },
+          "width": { "title": "Width", "type": "integer" },
+          "numInferenceSteps": {
+            "title": "Numinferencesteps",
+            "type": "integer"
+          },
+          "strength": { "title": "Strength", "type": "number" },
+          "guidanceScale": { "title": "Guidancescale", "type": "number" },
+          "numberOfImages": { "title": "Numberofimages", "type": "integer" },
+          "alpha": { "title": "Alpha", "type": "number" },
+          "seed": { "title": "Seed", "type": "integer" }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" }
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] }
+          },
+          "msg": { "title": "Message", "type": "string" },
+          "type": { "title": "Error Type", "type": "string" }
+        }
+      }
+    }
+  }
+}
