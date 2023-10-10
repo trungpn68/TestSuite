@@ -1,6 +1,13 @@
 from PIL import Image, ImageDraw, ImageFont
 import io
-import pprint
+
+def drawDict(dic):
+    string = ""
+    for key, value in dic.items():
+        if type(value) == dict:
+            value = drawDict(value)
+        string += f"{key}: {value}\n"
+    return string
 
 def concatNimageAndText(input_images, paramDict, output_image):
     if not input_images:
@@ -15,7 +22,7 @@ def concatNimageAndText(input_images, paramDict, output_image):
     image_text_width = 800
     image_text_height = max([image.height for image in images] + [1024])
     # Create an image with the text
-    font_size = 30
+    font_size = 16
     font_color = (255, 255, 255)  # White color
     background_color = (0, 0, 0)  # Black background color
 
@@ -23,9 +30,7 @@ def concatNimageAndText(input_images, paramDict, output_image):
     image_with_text = Image.new("RGB", (image_text_width, image_text_height), background_color)
     draw = ImageDraw.Draw(image_with_text)
     text_position = (0, 0)
-    text = ""
-    for key, value in paramDict.items():
-        text += f"{key}: {value}\n"
+    text = drawDict(paramDict)
     draw.text(text_position, text, fill=font_color, font=font)
 
 
@@ -56,7 +61,7 @@ def concat2imageAndText(image1, image2, paramDict, output_image):
     image_text_width = max(image1.width, image2.width)
     image_text_height = max(image1.height, image2.height)
     # Create an image with the text
-    font_size = 30
+    font_size = 16
     font_color = (255, 255, 255)  # White color
     background_color = (0, 0, 0)  # Black background color
 
